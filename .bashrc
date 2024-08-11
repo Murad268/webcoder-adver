@@ -1,0 +1,2 @@
+aliasp pa="php artisan"
+
