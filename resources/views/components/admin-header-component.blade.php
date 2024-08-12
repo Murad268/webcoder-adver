@@ -1,21 +1,23 @@
 <div class="app-menu w-vertical-menu bg-vertical-menu ltr:border-r rtl:border-l border-vertical-menu-border fixed bottom-0 top-0 z-[1003] transition-all duration-75 ease-linear group-data-[sidebar-size=md]:w-vertical-menu-md group-data-[sidebar-size=sm]:w-vertical-menu-sm group-data-[sidebar-size=sm]:pt-header group-data-[sidebar=dark]:bg-vertical-menu-dark group-data-[sidebar=dark]:border-vertical-menu-dark group-data-[sidebar=brand]:bg-vertical-menu-brand group-data-[sidebar=brand]:border-vertical-menu-brand group-data-[sidebar=modern]:bg-gradient-to-tr group-data-[sidebar=modern]:to-vertical-menu-to-modern group-data-[sidebar=modern]:from-vertical-menu-form-modern group-data-[layout=horizontal]:w-full group-data-[layout=horizontal]:bottom-auto group-data-[layout=horizontal]:top-header hidden md:block print:hidden group-data-[sidebar-size=sm]:absolute group-data-[sidebar=modern]:border-vertical-menu-border-modern group-data-[layout=horizontal]:dark:bg-zink-700 group-data-[layout=horizontal]:border-t group-data-[layout=horizontal]:dark:border-zink-500 group-data-[layout=horizontal]:border-r-0 group-data-[sidebar=dark]:dark:bg-zink-700 group-data-[sidebar=dark]:dark:border-zink-600 group-data-[layout=horizontal]:group-data-[navbar=scroll]:absolute group-data-[layout=horizontal]:group-data-[navbar=bordered]:top-[calc(theme('spacing.header')_+_theme('spacing.4'))] group-data-[layout=horizontal]:group-data-[navbar=bordered]:inset-x-4 group-data-[layout=horizontal]:group-data-[navbar=hidden]:top-0 group-data-[layout=horizontal]:group-data-[navbar=hidden]:h-16 group-data-[layout=horizontal]:group-data-[navbar=bordered]:w-[calc(100%_-_2rem)] group-data-[layout=horizontal]:group-data-[navbar=bordered]:[&.sticky]:top-header group-data-[layout=horizontal]:group-data-[navbar=bordered]:rounded-b-md group-data-[layout=horizontal]:shadow-md group-data-[layout=horizontal]:shadow-slate-500/10 group-data-[layout=horizontal]:dark:shadow-zink-500/10 group-data-[layout=horizontal]:opacity-0">
     <div class="flex items-center justify-center px-5 text-center h-header group-data-[layout=horizontal]:hidden group-data-[sidebar-size=sm]:fixed group-data-[sidebar-size=sm]:top-0 group-data-[sidebar-size=sm]:bg-vertical-menu group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:bg-vertical-menu-dark group-data-[sidebar-size=sm]:group-data-[sidebar=brand]:bg-vertical-menu-brand group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:bg-gradient-to-br group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:to-vertical-menu-to-modern group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:from-vertical-menu-form-modern group-data-[sidebar-size=sm]:group-data-[sidebar=modern]:bg-vertical-menu-modern group-data-[sidebar-size=sm]:z-10 group-data-[sidebar-size=sm]:w-[calc(theme('spacing.vertical-menu-sm')_-_1px)] group-data-[sidebar-size=sm]:group-data-[sidebar=dark]:dark:bg-zink-700">
-        <a href="{{route('admin.dashboard')}}" class="group-data-[sidebar=dark]:hidden group-data-[sidebar=brand]:hidden group-data-[sidebar=modern]:hidden">
+        <a href="{{ route('admin.dashboard') }}" class="group-data-[sidebar=dark]:hidden group-data-[sidebar=brand]:hidden group-data-[sidebar=modern]:hidden">
             <span class="hidden group-data-[sidebar-size=sm]:block">
-                <img src="{{env('APP_URL').'/'.ServiceFacade::getData()->with('images')->first()->images->where('type', 'logo')->first()->url ?? ""}}" alt="" class="h-6 mx-auto">
+                <img src="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'logo')->first())->url ?? '' }}" alt="" class="h-6 mx-auto">
             </span>
-            <span class="group-data-[sidebar-size=sm]:hidden">
-                <img src="{{env('APP_URL').'/'.ServiceFacade::getData()->with('images')->first()->images->where('type', 'logo')->first()->url ?? ""}}" alt="" class="h-6 mx-auto">
+                    <span class="group-data-[sidebar-size=sm]:hidden">
+                <img src="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'logo')->first())->url ?? '' }}" alt="" class="h-6 mx-auto">
             </span>
-        </a>
-        <a href="{{route('admin.dashboard')}}" class="hidden group-data-[sidebar=dark]:block group-data-[sidebar=brand]:block group-data-[sidebar=modern]:block">
+                </a>
+
+                <a href="{{ route('admin.dashboard') }}" class="hidden group-data-[sidebar=dark]:block group-data-[sidebar=brand]:block group-data-[sidebar=modern]:block">
             <span class="hidden group-data-[sidebar-size=sm]:block">
-                <img src="{{env('APP_URL').'/'.ServiceFacade::getData()->with('images')->first()->images->where('type', 'logo')->first()->url ?? ""}}" alt="" class="h-6 mx-auto">
+                <img src="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'logo')->first())->url ?? '' }}" alt="" class="h-6 mx-auto">
             </span>
-            <span class="group-data-[sidebar-size=sm]:hidden">
-                <img src="{{env('APP_URL').'/'.ServiceFacade::getData()->with('images')->first()->images->where('type', 'logo')->first()->url ?? ""}}" alt="" class="h-6 mx-auto">
+                    <span class="group-data-[sidebar-size=sm]:hidden">
+                <img src="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'logo')->first())->url ?? '' }}" alt="" class="h-6 mx-auto">
             </span>
-        </a>
+                </a>
+
         <button type="button" class="hidden p-0 float-end" id="vertical-hover">
             <i class="ri-record-circle-line"></i>
         </button>
@@ -57,6 +59,9 @@
                         <ul class="ltr:pl-[1.75rem] rtl:pr-[1.75rem] group-data-[sidebar-size=md]:ltr:pl-0 group-data-[sidebar-size=md]:rtl:pr-0 group-data-[sidebar-size=sm]:ltr:pl-0 group-data-[sidebar-size=sm]:rtl:pr-0 group-data-[sidebar-size=sm]:py-2 group-data-[layout=horizontal]:ltr:pl-0 group-data-[layout=horizontal]:rtl:pr-0">
                             <li>
                                 <a href="{{route('siteinfo.edit', 1)}}" class="relative flex items-center px-6 py-2 text-vertical-menu-item-font-size transition-all duration-75 ease-linear text-vertical-menu-sub-item hover:text-vertical-menu-sub-item-hover [&.active]:text-vertical-menu-sub-item-active before:absolute ltr:before:left-1.5 rtl:before:right-1.5 before:top-4 before:w-1 before:h-1 before:rounded before:transition-all before:duration-75 before:ease-linear before:bg-vertical-menu-sub-item hover:before:bg-vertical-menu-sub-item-hover [&.active]:before:bg-vertical-menu-sub-item-active group-data-[sidebar=dark] " data-key="t-analytics"> Məlumatlarımız </a>
+                            </li>
+                            <li>
+                                <a href="{{route('about.edit', 1)}}" class="relative flex items-center px-6 py-2 text-vertical-menu-item-font-size transition-all duration-75 ease-linear text-vertical-menu-sub-item hover:text-vertical-menu-sub-item-hover [&.active]:text-vertical-menu-sub-item-active before:absolute ltr:before:left-1.5 rtl:before:right-1.5 before:top-4 before:w-1 before:h-1 before:rounded before:transition-all before:duration-75 before:ease-linear before:bg-vertical-menu-sub-item hover:before:bg-vertical-menu-sub-item-hover [&.active]:before:bg-vertical-menu-sub-item-active group-data-[sidebar=dark] " data-key="t-analytics"> Haqqımda </a>
                             </li>
                         </ul>
                     </div>
@@ -130,17 +135,18 @@
             <div class="flex items-center w-full group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl navbar-header group-data-[layout=horizontal]:ltr:xl:pr-3 group-data-[layout=horizontal]:rtl:xl:pl-3">
                 <!-- LOGO -->
                 <div class="items-center justify-center hidden px-5 text-center h-header group-data-[layout=horizontal]:md:flex group-data-[layout=horizontal]:ltr::pl-0 group-data-[layout=horizontal]:rtl:pr-0">
-                    <a href="{{route('admin.dashboard')}}">
+                    <a href="{{ route('admin.dashboard') }}">
+                    <span class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden">
+                        <img src="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'logo')->first())->url ?? 'path/to/default/logo.png' }}" alt="" class="h-6 mx-auto">
+                    </span>
+                                    </a>
 
-                        <span class="group-data-[topbar=dark]:hidden group-data-[topbar=brand]:hidden">
-                            <img src="{{env('APP_URL').'/'.ServiceFacade::getData()->with('images')->first()->images->where('type', 'logo')->first()->url ?? ""}}" alt="" class="h-6 mx-auto">
-                        </span>
-                    </a>
-                    <a href="{{route('admin.dashboard')}}" class="hidden group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
-                        <span class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
-                            <img src="{{env('APP_URL').'/'.ServiceFacade::getData()->with('images')->first()->images->where('type', 'logo')->first()->url ?? ""}}" alt="" class="h-6 mx-auto">
-                        </span>
-                    </a>
+                                    <a href="{{ route('admin.dashboard') }}" class="hidden group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
+                                        <span class="group-data-[topbar=dark]:block group-data-[topbar=brand]:block">
+                                            <img src="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'logo')->first())->url ?? 'path/to/default/logo.png' }}" alt="" class="h-6 mx-auto">
+                                        </span>
+                                    </a>
+
                 </div>
 
                 <button type="button" class="inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-75 ease-linear bg-topbar rounded-md btn hover:bg-slate-100 group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:border-topbar-dark group-data-[topbar=dark]:text-topbar-item-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:border-topbar-brand group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:dark:border-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[layout=horizontal]:flex group-data-[layout=horizontal]:md:hidden hamburger-icon" id="topnav-hamburger-icon">

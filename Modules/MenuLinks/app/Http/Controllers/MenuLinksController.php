@@ -4,6 +4,7 @@ namespace Modules\MenuLinks\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Services\RemoveService;
+use App\Services\ServiceContainer;
 use App\Services\SimpleCrudService;
 use Illuminate\Http\Request;
 use Modules\MenuLinks\Http\Requests\MenuRequest;
@@ -17,7 +18,8 @@ class MenuLinksController extends Controller
         protected SimpleCrudService $crudService,
         protected MenuLinkRepository $menuLinkRepository,
         protected RemoveService $removeService,
-        protected ModelRepository $langRepository
+        protected ModelRepository $langRepository,
+        public ServiceContainer $services
     ) {
     }
 
@@ -28,7 +30,7 @@ class MenuLinksController extends Controller
         $items = $q
             ? $this->menuLinkRepository->search($q, $perPage)
             : $this->menuLinkRepository->paginate($perPage);
-    
+
         return view('menulinks::index', compact('items', 'q'));
     }
 
@@ -64,8 +66,8 @@ class MenuLinksController extends Controller
     {
 
         return $this->executeSafely(function () use ($request, $id) {
-            $menuLink = $this->menuLinkRepository->find($id);
-            $menuLink->update($request->all());
+            $model = $this->menuLinkRepository->find($id);
+            $this->services->crudService->update($model, $request, 'siteinfo');
             return redirect()->route('menulinks.index')->with('status', 'Link uğurla yeniləndi.');
         }, 'menulinks.index');
     }

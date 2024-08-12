@@ -5,13 +5,14 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Modules\MenuLinks\Repositories\MenuLinkRepository;
 
-class admin-header-component extends Component
+class ClientHeaderComponent extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(public MenuLinkRepository $repository)
     {
         //
     }
@@ -21,6 +22,9 @@ class admin-header-component extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin-header-component');
+        $links = $this->repository->all();
+
+
+        return view('components.client-header-component', compact('links'));
     }
 }

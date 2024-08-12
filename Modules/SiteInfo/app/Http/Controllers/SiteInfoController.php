@@ -76,7 +76,7 @@ class SiteInfoController extends Controller
         return $this->executeSafely(function () use ($request, $id) {
             $model = $this->repository->find($id);
             $this->services->crudService->update($model, $request, 'siteinfo');
-            return redirect()->route('siteinfo.edit', ['siteinfo' => $model->id])->with('status', 'siteinfo uğurla yeniləndi');
+            return redirect()->route('siteinfo.edit', ['siteinfo' => $id])->with('status', 'siteinfo uğurla yeniləndi');
         }, 'siteinfo.edit', false, ['siteinfo' => $id]);
     }
 

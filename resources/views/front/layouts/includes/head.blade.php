@@ -15,10 +15,10 @@
     <link rel="stylesheet" href="{{asset('client/assets/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/assets/css/style.css')}}">
     <link type="text/css" rel="stylesheet" href="css-1?family=Open+Sans:400,400italic,700,700italic">
-    <link rel="icon" href="img/icon.png">
-    <link rel="apple-touch-icon" href="{{asset('client/assets/img/apple-favicon.png')}}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('client/assets/img/icon.png')}}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('client/assets/img/icon.png')}}">
+    <link rel="icon" href="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'favicon')->first())->url ?? 'path/to/default/logo.png' }}">
+    <link rel="apple-touch-icon" href="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'favicon')->first())->url ?? 'path/to/default/logo.png' }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'favicon')->first())->url ?? 'path/to/default/logo.png' }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'favicon')->first())->url ?? 'path/to/default/logo.png' }}">
     <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js">
 			</script>

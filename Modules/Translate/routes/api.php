@@ -13,5 +13,5 @@ Route::middleware(['web', 'auth'])->group(function () {
 
 
 Route::prefix('{locale}')->group(function () {
-    Route::get('/get_translate', [TranslateApiController::class, 'get_translate'])->name('translate.get_translate');
+    Route::get('/get_translate', [TranslateApiController::class, 'get_translate'])->middleware('checkpermission:3,4')->middleware('web')->name('translate.get_translate');
 });

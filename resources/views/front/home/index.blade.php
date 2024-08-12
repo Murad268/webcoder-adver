@@ -1,24 +1,24 @@
 @extends('front.layouts.app')
 @section('content')
 <script src="recaptcha/api.js" async="" defer=""></script>
-<section id="home" class="page-table home-1">
+<section id="home" style="background-image: url('{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'banner_image')->first())->url ?? '' }}')" class="page-table home-1">
     <div class="table-cell">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <h1 class="intro-title">
-                        Teymur Məmmədov
+                        {{ TranslateService::getTranslation('home_page', 'hero_title', app()->getLocale()) }}
                     </h1>
                     <ul class="intro-social">
                         <li class="main-color-bg">
-                            <a class="text-center effect" target="_blank" href="https://www.facebook.com/advernaming/"><i class="fa fa-facebook"></i></a>
+                            <a class="text-center effect" target="_blank" href="{{ServiceFacade::getData()->facebook_link}}"><i class="fa fa-facebook"></i></a>
                         </li>
                         <li class="main-color-bg">
-                            <a class="text-center effect" target="_blank" href="https://www.linkedin.com/in/teymur-mammadov-966ab942/"><i class="fa fa-linkedin"></i></a>
+                            <a class="text-center effect" target="_blank" href="{{ServiceFacade::getData()->linkedin_link}}"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
-                    <a href="#about" class="button home-btn main-color-bg effect scroll-btn">Haqqımızda</a>
-                    <a href="index.htm" class="br-button home-btn main-color-bg effect"> <span class="main-color effect">Əlaqə saxla</span> </a>
+                    <a href="{{route('client.about')}}" class="button home-btn main-color-bg effect scroll-btn">{{ TranslateService::getTranslation('home_page', 'hero_title_about_button', app()->getLocale()) }}</a>
+                    <a href="#contact" class="br-button home-btn main-color-bg effect"> <span class="main-color effect">{{ TranslateService::getTranslation('home_page', 'hero_title_contact_button', app()->getLocale()) }}</span> </a>
                 </div>
             </div>
         </div>
@@ -34,70 +34,25 @@
             <div class="col-xs-12">
                 <div class="title-box text-center">
                     <h2>
-                        Haqqımızda <span class="main-color-bg hor-center">
-                        </span>
+                        {{ TranslateService::getTranslation('home_page', 'about_section_title', app()->getLocale()) }} <span class="main-color-bg hor-center"></span>
                     </h2>
-                    <p>
-                        Advermə (neyminq) xüsusi məsuliyyət tələb edən ciddi və
-                        mürəkkəb yaradıcılıq prosesidir. Axı hər şey addan başlayır. </p>
+                    <p>{{ TranslateService::getTranslation('home_page', 'about_section_citation', app()->getLocale()) }} </p>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="video-intro">
-                    <img src="az/showImage/ArticleFiles/28?&crop=main&w=555&h=451" alt="">
+                    <img src="{{$about->home_page_about_image->url}}" alt="">
                 </div>
             </div>
             <div class="col-md-6">
                 <h3 class="text-center personal-title">
-                    Şəxsi məlumatlar </h3>
+                    {{ TranslateService::getTranslation('home_page', 'about_section_subtitle', app()->getLocale()) }} </h3>
                 <div class="personal-info text-center">
-                    ADVER.AZ - Kreativ direktor /
-
-                    PamPam - Kreativ butik, Kreativ direktor /
-
-                    T&amp;J şirkəti - direktor /
-
-                    ARKA reklam şirkəti - mətn yazarı /
-
-                    aLOVE Şirniyyat Evi - marketinq direktoru /
-
-                    VİTAM reklam şirkəti - həmtəsisiçi və kreativ direktor /
-
-                    Çudo Peçka MMC - marketinq direktoru /
-
-                    McCANN Azerbaijan reklam şirkəti - kreativ direktor /
-
-                    McCANN Azerbaijan reklam şirkəti - mətn yazarı /
-
-                    AVTOBİZNES qəzeti - redaktor /
-
-                    Azərbaycan Respublikası Prezidentinin İşlər idarəsinin “RESPUBLİKA” qəzetinin - baş redaktorun birinci müavini /
-
-                    ECONOM-EXPRESS beynəlxalq həftəlik qəzeti - baş redaktor /
-
-                    YURD jurnalı - Baş redaktoru yanında xüsusi müxbir /
-
-                    Sirdaş MMC şirkəti - reklam və informasiya departamentinin müdiri /
-
-                    SALAM qəzeti - baş redaktorun birinci müavini /
-
-                    MOLODYOJ AZERBAYDJANA qəzeti - sosial-iqtisadi və hüquq problemləri şöbəsinin müdiri /
-
-                    MOLODYOJ AZERBAYDJANA qəzeti - Baş redaktor yanında xüsusi müxbir /
-
-                    İDMAN QƏZETİNƏ ŞAHMAT ƏLAVƏSİ - müxbir və tərcüməçi /
-
-                    QƏBƏLƏ rayonu - tarix müəllimi /
-
-                    BİNƏ HAVA LİMANI - lövbər dayanacağı növbətçi mexaniki /
-
-                    Azərbaycan Mülki Müdafiə Qərərgahı, inspektor /
-
-                    LENİNNEFT-də quyuların yeraltı təmiri operatoru / <div>
-                        <a href="az/haqqimizda.html" class="button about-btn main-color-bg effect">Ətraflı</a>
-                        <a href="#contact" class="br-button about-btn main-color-bg effect scroll-btn"><span class="main-color effect">Əlaqə saxla</span></a>
+                    {!! $about->home_page_about_text !!} <div>
+                        <a href="{{route('client.about')}}" class="button about-btn main-color-bg effect"> {{ TranslateService::getTranslation('home_page', 'about_section_more_button', app()->getLocale()) }}</a>
+                        <a href="#contact" class="br-button about-btn main-color-bg effect scroll-btn"><span class="main-color effect"> {{ TranslateService::getTranslation('home_page', 'about_section_contact_button', app()->getLocale()) }}</span></a>
                     </div>
                 </div>
             </div>
@@ -110,10 +65,10 @@
             <div class="col-xs-12">
                 <div class="title-box text-center">
                     <h2>
-                        İşlər <span class="main-color-bg hor-center">
+                        {{ TranslateService::getTranslation('home_page', 'works_section_title', app()->getLocale()) }} <span class="main-color-bg hor-center">
                         </span>
                     </h2>
-                    <p>Advermə ilə bağlı görülən yaxşı işlər adı verənə şərəf , uğursuz adlar isə güvənsizlik gətirər.</p>
+                    <p>{{ TranslateService::getTranslation('home_page', 'works_section_citation', app()->getLocale()) }}</p>
                 </div>
             </div>
         </div>
@@ -167,7 +122,7 @@
                 </div>
             </div>
         </div>
-        <a href="az/isler.html" class="br-button section-btn main-color-bg effect"><span class="main-color effect">Digər işlər</span></a>
+        <a href="az/isler.html" class="br-button section-btn main-color-bg effect"><span class="main-color effect">{{ TranslateService::getTranslation('home_page', 'works_section_more', app()->getLocale()) }}</span></a>
     </div>
     <a href="#blog" class="left-link ver-center main-color scroll-btn"><i class="fa fa-long-arrow-left main-color"></i><span class="main-color">Bloq</span></a>
 </section>
@@ -276,7 +231,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div id="contact" class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2">
                 <form id="contact-form-new" action="/" method="post">
                     <div class="col-sm-6 col-xs-12">

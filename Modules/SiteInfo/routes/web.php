@@ -20,7 +20,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('siteinfo/create', [SiteInfoController::class, 'create'])->middleware('checkpermission:4,2')->name('siteinfo.create');
     Route::post('siteinfo', [SiteInfoController::class, 'store'])->middleware('checkpermission:4,2')->name('siteinfo.store');
     Route::get('siteinfo/{siteinfo}/edit', [SiteInfoController::class, 'edit'])->middleware('checkpermission:4,3')->name('siteinfo.edit');
-    Route::put('siteinfo/{siteinfo}', [SiteInfoController::class, 'update'])->middleware('checkpermission:4,3')->name('siteinfo.update');
+    Route::patch('siteinfo/{siteinfo}/update', [SiteInfoController::class, 'update'])->middleware('checkpermission:4,3')->name('siteinfo.update');
 
 
     Route::get('siteinfo/changeStatusFalse/{id}', [SiteInfoController::class, 'changeStatusFalse'])->middleware('checkpermission:4,3')->name('siteinfo.changeStatusFalse');

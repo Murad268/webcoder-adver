@@ -6,7 +6,8 @@
     <meta content="Minimal Admin & Dashboard Template" name="description">
     <meta content="Themesdesign" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{env('APP_URL').'/'.ServiceFacade::getData()->with('images')->first()->images->where('type', 'logo')->first()->url ?? ""}}">
+    <link rel="shortcut icon" href="{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'logo')->first())->url ?? '' }}">
+
     <!-- Layout config Js -->
     <script src="{{asset('panel/assets/js/layout.js')}}"></script>
     <!-- Icons CSS -->

@@ -105,7 +105,7 @@
                                     <label for="nav_logo" class="inline-block mb-2 text-base font-medium">Favikon</label>
                                     <div class="wrapper_image relative w-64 h-24">
                                         @foreach($model->images->where('type', 'favicon') as $image)
-                                        <div class="relative w-64 h-24">
+                                        <div style="width: 80px; height: 80px;" class="relative w-64 h-24">
                                             <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
                                                 <img style="width: 100%; height: 100%;" src="{{ asset($image->url) }}" alt="">
                                             </a>
@@ -126,7 +126,7 @@
 
                                     <div class="wrapper_image relative w-64 h-24">
                                         @foreach($model->images->where('type', 'logo') as $image)
-                                        <div class="relative w-64 h-24">
+                                        <div style="width: 100px; height: 60px;" class="relative w-64 h-24">
                                             <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
                                                 <img style="width: 100%; height: 100%;" src="{{ asset($image->url) }}" alt="">
                                             </a>

@@ -6,6 +6,7 @@ namespace App\Providers;
 use App\Services\ServiceContainer;
 use App\Services\SettingsService;
 use App\Services\TranslateService;
+use App\View\Components\ClientHeaderComponent;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Modules\SiteInfo\Repositories\ModelRepository;
@@ -58,5 +59,7 @@ class AppServiceProvider extends ServiceProvider
                         </div>
                     <?php endif; ?>";
         });
+
+
     }
 }

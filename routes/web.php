@@ -13,13 +13,29 @@ Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->n
 Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login.post');
 Route::post('/admin/logout', [LogoutController::class, 'logout'])->name('admin.logout');
+$repository = app(\Modules\MenuLinks\Repositories\MenuLinkRepository::class);
+
+Route::prefix('')->name('client.')->group(function () use ($repository) {
 
 
-Route::prefix('')->name('client.')->group(function () {
-    Route::get('/', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
-    Route::get('/about', [AboutController::class, 'index'])->name('about');
-    Route::get('/works', [WorkController::class, 'index'])->name('works');
-    Route::get('/works/{slug}', [WorkController::class, 'work'])->name('work');
-    Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
-    Route::get('/blogs/{slug}', [BlogController::class, 'blog'])->name('blog');
+    foreach ($repository->all() as $link) {
+        if ($link->code == 'home') {
+            Route::get('/', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name($link->code);
+        } elseif ($link->code == 'about') {
+            Route::get($link->slug, [AboutController::class, 'index'])->name($link->code);
+        } elseif ($link->code == 'works') {
+            Route::get($link->slug, [WorkController::class, 'index'])->name($link->code);
+        } elseif ($link->code == 'work') {
+            Route::get($link->slug. "{slug}", [WorkController::class, $link->code])->name($link->code);
+        } elseif ($link->code == 'blogs') {
+            Route::get($link->slug, [BlogController::class, 'index'])->name($link->code);
+        } elseif ($link->code == 'blog') {
+            Route::get($link->slug . "{slug}", [BlogController::class, $link->code])->name($link->code);
+        } else {
+            Route::get($link->slug, [AboutController::class, 'index'])->name($link->code);
+        }
+    }
+
+
+
 });
