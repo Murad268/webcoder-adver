@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
                 $app->make(\App\Services\PinService::class),
                 $app->make(\App\Services\GeneralService::class),
                 $app->make(\App\Services\DefaultService::class),
+                $app->make(\App\Services\OrderService::class),
             );
         });
 

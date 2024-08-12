@@ -32,7 +32,10 @@ class Blog extends Model
     {
         return $this->hasMany(SystemFiles::class, 'relation_id')->where('model_type', 'blog')->where('file_type', 'image');
     }
-
+    public function image()
+    {
+        return $this->hasOne(SystemFiles::class, 'relation_id')->where('model_type', 'blog')->where('file_type', 'image');
+    }
     protected static function newFactory(): BlogFactory
     {
         //return BlogFactory::new();

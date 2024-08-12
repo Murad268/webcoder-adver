@@ -91,7 +91,15 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div class="d-flex">
+                                            <div style="display: flex" class="d-flex">
+                                                <div>
+                                                    <a style="width: 30px; border: 1px solid black;display: flex; justify-content: center; align-items: center" class="arrow_up" href="{{route('admin.work.changeOrderUp', $item->id)}}" class="btn btn-phoenix-success me-1 mb-1" type="button">
+                                                        ↑
+                                                    </a>
+                                                    <a style="width: 30px; border: 1px solid black; display: flex; justify-content: center; align-items: center" class="arrow_down" href="{{route('admin.work.changeOrderDown', $item->id)}}" class="btn btn-phoenix-success me-1 mb-1" type="button">
+                                                        ↓
+                                                    </a>
+                                                </div>
                                                 <a href="{{route('admin.work.edit', $item->id)}}" class="btn btn-phoenix-success me-1 mb-1" type="button">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen">
                                                         <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -100,7 +108,7 @@
                                                 </a>
 
                                                 @if($item->status)
-                                                @if($activeItemsCount < 2 or $items->count() < 2) <a style="cursor: none" class="btn btn-phoenix-danger me-1 mb-1" type="link">
+                                                @if($activeItemsCount < 2 ) <a style="cursor: none" class="btn btn-phoenix-danger me-1 mb-1" type="link">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info">
                                                             <circle cx="12" cy="12" r="10" />
                                                             <path d="M12 16v-4" />
@@ -117,7 +125,7 @@
                                                         @endif
 
                                                         @else
-                                                        <a href="{{route('work.changeStatusTrue',$item->id)}}" class="btn btn-phoenix-secondary me-1 mb-1 change_status_true" type="button">
+                                                        <a href="{{route('admin.work.changeStatusTrue',$item->id)}}" class="btn btn-phoenix-secondary me-1 mb-1 change_status_true" type="button">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up">
                                                                 <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
                                                                 <polyline points="16 7 22 7 22 13" />

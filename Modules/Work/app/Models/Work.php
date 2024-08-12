@@ -32,7 +32,10 @@ class Work extends Model
     {
         return $this->hasMany(SystemFiles::class, 'relation_id')->where('model_type', 'work')->where('file_type', 'image');
     }
-
+    public function image()
+    {
+        return $this->hasOne(SystemFiles::class, 'relation_id')->where('model_type', 'work')->where('file_type', 'image');
+    }
     protected static function newFactory(): WorkFactory
     {
         //return WorkFactory::new();

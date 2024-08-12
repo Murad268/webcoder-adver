@@ -18,7 +18,8 @@ class ServiceContainer
         public ImageService $imageService,
         public PinService $pinRepository,
         public GeneralService $generalService,
-        public DefaultService $defaultService
+        public DefaultService $defaultService,
+        public OrderService $orderService
     ) {}
 }
 

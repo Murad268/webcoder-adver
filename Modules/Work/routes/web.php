@@ -23,5 +23,7 @@ Route::group(['prefix' => "admin", 'middleware' => 'auth', 'as' => 'admin.'], fu
 
     Route::get('/work/changeStatusFalse/{id}', [WorkController::class, 'changeStatusFalse'])->middleware('checkpermission:10,3')->name('work.changeStatusFalse');
     Route::get('/work/changeStatusTrue/{id}', [WorkController::class, 'changeStatusTrue'])->middleware('checkpermission:10,3')->name('work.changeStatusTrue');
+    Route::get('/work/order_up/{id}', [WorkController::class, 'changeOrderUp'])->middleware('checkpermission:10,3')->name('work.changeOrderUp');
+    Route::get('/work/order_down/{id}', [WorkController::class, 'changeOrderDown'])->middleware('checkpermission:10,3')->name('work.changeOrderDown');
     Route::get('/work/deleteFile/{id}', [WorkController::class, 'deleteFile'])->middleware('checkpermission:10,3')->name('work.deleteFile');
 });

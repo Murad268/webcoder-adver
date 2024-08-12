@@ -16,21 +16,22 @@
                   <div class="col-xs-12">
                       <ul class="footer-social">
                           <li class="main-color">
-                              <a href="https://www.facebook.com/advernaming/" target="_blank" class="main-color-bg effect"><i class="fa fa-facebook"></i></a>
+                              <a href="{{ServiceFacade::getData()->facebook_link}}" target="_blank" class="main-color-bg effect"><i class="fa fa-facebook"></i></a>
                           </li>
 
                           <li class="main-color">
-                              <a href="https://www.linkedin.com/in/teymur-mammadov-966ab942/" target="_blank" class="main-color-bg effect"><i class="fa fa-linkedin"></i></a>
+                              <a href="{{ServiceFacade::getData()->linkedin_link}}" target="_blank" class="main-color-bg effect"><i class="fa fa-linkedin"></i></a>
                           </li>
                       </ul>
                   </div>
                   <div class="col-xs-12">
                       <ul class="footer-nav">
-                          <li><a href="az.html">Ana səhifə</a></li>
-                          <li><a href="az/haqqimizda.html">Haqqımızda</a></li>
-                          <li><a href="/az/xidmetlerimiz">Xidmətlərimiz</a></li>
-                          <li><a href="az/isler.html">İşlər</a></li>
-                          <li><a href="az/bloq.html">Bloq</a></li>
+                          @foreach($links as $link)
+                              @if($link->code != "work" and $link->code != "blog")
+                                  <li><a href="{{$link->slug}}">{{$link->title}}</a></li>
+
+                              @endif
+                          @endforeach
                       </ul>
                   </div>
               </div>
@@ -42,7 +43,7 @@
               <div class="row">
                   <div class="col-xs-12">
                       <p>
-                          Adver.az &copy; 2017. ALL RIGHT RESERVED
+                          {{ServiceFacade::getData()->copyright_text}}
                       </p>
                   </div>
               </div>

@@ -15,6 +15,10 @@ abstract class Repository
     {
         return $this->modelClass::orderBy('order')->where('status', 1)->get();
     }
+    public function active_all($limit = null, $relation = [])
+    {
+        return $this->modelClass::orderBy('order')->where('status', 1)->with($relation)->paginate($limit);
+    }
     public function all_activeWith($relations = [])
     {
         return $this->modelClass::orderBy('order')->with($relations)->where('status', 1)->get();

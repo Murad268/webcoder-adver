@@ -15,7 +15,6 @@
                 @foreach($links as $link)
                     @if($link->code != "work" and $link->code != "blog")
                         <li><a href="{{$link->slug}}">{{$link->title}}</a></li>
-
                         @endif
                 @endforeach
             </ul>

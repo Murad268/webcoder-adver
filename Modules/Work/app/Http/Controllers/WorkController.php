@@ -27,9 +27,9 @@ class WorkController extends Controller
         $q = $request->q;
         $activeItemsCount = $this->repository->all_active()->count();
         if ($q) {
-            $items = $this->repository->search($q, 80);
+            $items = $this->repository->search($q, 10);
         } else {
-            $items = $this->repository->all(80);
+            $items = $this->repository->all(10);
         }
         return view('work::index', compact('items', 'q', 'activeItemsCount'));
     }
@@ -99,21 +99,31 @@ class WorkController extends Controller
 
     public function changeStatusTrue($id)
     {
-        return $this->commonService->changeStatus($id, $this->repository, $this->services->statusService, new Work(), true, 'work.index');
+        return $this->commonService->changeStatus($id, $this->repository, $this->services->statusService, new Work(), true, 'admin.work.index');
     }
 
     public function changeStatusFalse($id)
     {
-        return $this->commonService->changeStatus($id, $this->repository, $this->services->statusService, new Work(), false, 'work.index');
+        return $this->commonService->changeStatus($id, $this->repository, $this->services->statusService, new Work(), false, 'admin.work.index');
     }
 
     public function delete_selected_items(Request $request)
     {
-        return $this->commonService->deleteSelectedItems($this->repository, $request, $this->services->removeService, 'work.index');
+        return $this->commonService->deleteSelectedItems($this->repository, $request, $this->services->removeService, 'admin.work.index');
     }
 
     public function deleteFile($id)
     {
-        return $this->commonService->deleteFile($id, $this->services->imageService, 'work.index');
+        return $this->commonService->deleteFile($id, $this->services->imageService, 'admin.work.index');
+    }
+
+    public function changeOrderUp($id) {
+        $this->services->orderService->up(new Work(), $id);
+        return redirect()->back();
+    }
+
+    public function changeOrderDown($id) {
+        $this->services->orderService->down(new Work, $id);
+        return redirect()->back();
     }
 }

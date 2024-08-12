@@ -5,13 +5,14 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Modules\MenuLinks\Repositories\MenuLinkRepository;
 
 class ClientFooterComponent extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(public MenuLinkRepository $repository)
     {
         //
     }
@@ -21,6 +22,7 @@ class ClientFooterComponent extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.client-footer-component');
+        $links = $this->repository->all();
+        return view('components.client-footer-component', compact('links'));
     }
 }
