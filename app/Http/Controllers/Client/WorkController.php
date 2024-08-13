@@ -19,8 +19,10 @@ class WorkController extends Controller
     }
 
 
-    public function work()
+    public function work($slug)
     {
-        return view('front.work.details');
+        $work = $this->repository->getBySlug('slug', $slug, 'image');
+
+        return view('front.work.details', compact('work'));
     }
 }

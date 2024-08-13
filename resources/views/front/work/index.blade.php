@@ -34,8 +34,8 @@
                 <div class="col-xs-12 col-sm-6 col-md-4 work-item effect">
                     <div class="single-work mb-30">
                         <img class="effect" src="{{$work->image->url}}" alt="" style="width: 360; height: 327px;" />
-                        <a href="/az/isler-lafarella-100006" class="work-overlay effect">
-                            <h3>{{$work->title}}</h3>
+                        <a href="{{route('client.work', $work->slug)}}" class="work-overlay effect">
+                            <h3>{{$work->card_title}}</h3>
                         </a>
                     </div>
                 </div>

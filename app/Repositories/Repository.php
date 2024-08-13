@@ -62,6 +62,10 @@ abstract class Repository
     {
         return $this->modelClass::where($key, $value);
     }
+    public function getBySlug($key, $value, $relation=null)
+    {
+        return $this->modelClass::where($key, 'like', "%". $value."%")->with($relation)->first();
+    }
 
     public function getTrainingByCategory($categoryId)
     {

@@ -3,12 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all">
-    <meta name="language" http-equiv="content-language" content="az">
-    <meta property="og:title" content="Adver.az">
-    <meta name="description" content="Adver.az">
-    <meta property="og:description" content="Adver.az">
-    <meta property="og:image" content="{{asset('client/assets/img/logo/logo.png')}}">
-    <title>Adver.az</title>
+    <meta name="language" http-equiv="content-language" content="{{app()->getLocale()}}">
     <meta name="description" content="Adver.az">
     <link rel="stylesheet" type="text/css" href="{{asset('client/assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('client/assets/css/font-awesome.min.css')}}">
@@ -25,4 +20,6 @@
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js">
 			</script>
 		<![endif]-->
+
+    @stack('links')
 </head>

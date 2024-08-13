@@ -4,16 +4,31 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Modules\Blog\Repositories\ModelRepository;
 class BlogController extends Controller
 {
-    public function index()
+    public function __construct(public ModelRepository $repository)
     {
-        return view('front.blog.index');
+
+    }
+    public function index(Request $request)
+    {
+        $q = $request->q;
+        if ($q) {
+            $blogs = $this->repository->search($q, 3, ['image']);
+        } else {
+            $blogs = $this->repository->active_all(3, ['image']);
+        }
+
+        $popular_blogs = $this->repository->popular(4, ['image']);
+        return view('front.blog.index', compact('blogs', 'popular_blogs'));
     }
 
-    public function blog()
+    public function blog($slug)
     {
-        return view('front.blog.details');
+        $blog = $this->repository->getBySlug('slug', $slug, 'image');
+        $popular_blogs = $this->repository->popularNoneCurrent(4, ['image'], $blog->id);
+
+        return view('front.blog.details', compact('blog', 'popular_blogs'));
     }
 }

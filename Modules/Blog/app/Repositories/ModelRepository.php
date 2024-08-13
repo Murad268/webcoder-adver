@@ -8,13 +8,21 @@ class ModelRepository extends Repository
 {
     protected $modelClass = Blog::class;
 
-    public function search($query, $limit = 1)
+    public function search($query, $limit = 1, $relation=[])
     {
         return $this->modelClass::where('title->' . app()->getLocale(), 'like', "%{$query}%")
-            ->paginate($limit);
+            ->with($relation)->paginate($limit);
     }
     public function active_all($limit = null, $relation = [])
     {
-        return $this->modelClass::orderByDesc('order')->where('status', 1)->with($relation)->paginate($limit);
+        return $this->modelClass::orderByDesc('created_at')->where('status', 1)->with($relation)->paginate($limit);
+    }
+    public function popular($limit = null, $relation = [])
+    {
+        return $this->modelClass::orderByDesc('views_count')->where('status', 1)->with($relation)->paginate($limit);
+    }
+    public function popularNoneCurrent($limit = null, $relation = [], $blog_id)
+    {
+        return $this->modelClass::orderByDesc('views_count')->where('status', 1)->where('id', '!=', $blog_id)->with($relation)->paginate($limit);
     }
 }

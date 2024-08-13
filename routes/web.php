@@ -16,8 +16,6 @@ Route::post('/admin/logout', [LogoutController::class, 'logout'])->name('admin.l
 $repository = app(\Modules\MenuLinks\Repositories\MenuLinkRepository::class);
 
 Route::prefix('')->name('client.')->group(function () use ($repository) {
-
-
     foreach ($repository->all() as $link) {
         if ($link->code == 'home') {
             Route::get('/', [\App\Http\Controllers\Client\HomeController::class, 'index'])->name($link->code);
@@ -35,7 +33,4 @@ Route::prefix('')->name('client.')->group(function () use ($repository) {
             Route::get($link->slug, [AboutController::class, 'index'])->name($link->code);
         }
     }
-
-
-
 });
