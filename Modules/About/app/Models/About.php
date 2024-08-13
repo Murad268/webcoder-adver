@@ -28,6 +28,11 @@ class About extends Model
     {
         return $this->hasOne(SystemFiles::class, 'relation_id')->where('model_type', 'about')->where('file_type', 'image')->where('type', 'home_page_image');
     }
+
+    public function about_page_about_image()
+    {
+        return $this->hasOne(SystemFiles::class, 'relation_id')->where('model_type', 'about')->where('file_type', 'image')->where('type', 'about_page_image');
+    }
     protected static function newFactory(): AboutFactory
     {
         //return AboutFactory::new();

@@ -142,25 +142,86 @@
 
                                 </div>
                             </div>
-                            <div class="mb-3 flex-1">
-                                <label for="footer_logo" class="inline-block mb-2 text-base font-medium">Banner şəkli</label>
+                            <div class="grid grid-cols-2 gap-4 mb-3 flex-1">
+                                <div>
+                                    <label for="footer_logo" class="inline-block mb-2 text-base font-medium">Banner şəkli</label>
 
-                                <div class="wrapper_image relative w-64 h-24">
-                                    @foreach($model->images->where('type', 'banner_image') as $image)
-                                    <div class="relative w-64 h-24">
-                                        <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
-                                            <img style="width: 100%; height: 100%;" src="{{ asset($image->url) }}" alt="">
-                                        </a>
-                                        <a href="{{ route('siteinfo.deleteFile', $image->id) }}" style="cursor: pointer; position: absolute; top: 0; right: 0; background-color: red; color: white; padding: 6px;" class="delete_image" data-id="{{ $image->id }}">
-                                            X
-                                        </a>
+                                    <div class="wrapper_image relative w-64 h-24">
+                                        @foreach($model->images->where('type', 'banner_image') as $image)
+                                            <div class="relative w-64 h-24">
+                                                <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
+                                                    <img style="width: 100%; height: 100%;" src="{{ asset($image->url) }}" alt="">
+                                                </a>
+                                                <a href="{{ route('siteinfo.deleteFile', $image->id) }}" style="cursor: pointer; position: absolute; top: 0; right: 0; background-color: red; color: white; padding: 6px;" class="delete_image" data-id="{{ $image->id }}">
+                                                    X
+                                                </a>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    @endforeach
-                                </div>
-                                <div class="mt-3">
-                                    <input multiple name="banner_image[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                    <div class="mt-3">
+                                        <input multiple name="banner_image[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                    </div>
                                 </div>
 
+                                <div>
+                                    <label for="footer_logo" class="inline-block mb-2 text-base font-medium">Haqqımızda banner şəkli</label>
+
+                                    <div class="wrapper_image relative w-64 h-24">
+                                        @foreach($model->images->where('type', 'about_banner_image') as $image)
+                                            <div class="relative w-64 h-24">
+                                                <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
+                                                    <img style="width: 100%; height: 100%;" src="{{ asset($image->url) }}" alt="">
+                                                </a>
+                                                <a href="{{ route('siteinfo.deleteFile', $image->id) }}" style="cursor: pointer; position: absolute; top: 0; right: 0; background-color: red; color: white; padding: 6px;" class="delete_image" data-id="{{ $image->id }}">
+                                                    X
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="mt-3">
+                                        <input multiple name="about_banner_image[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="footer_logo" class="inline-block mb-2 text-base font-medium">İşlər banner şəkli</label>
+
+                                    <div class="wrapper_image relative w-64 h-24">
+                                        @foreach($model->images->where('type', 'works_banner_image') as $image)
+                                            <div class="relative w-64 h-24">
+                                                <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
+                                                    <img style="width: 100%; height: 100%;" src="{{ asset($image->url) }}" alt="">
+                                                </a>
+                                                <a href="{{ route('siteinfo.deleteFile', $image->id) }}" style="cursor: pointer; position: absolute; top: 0; right: 0; background-color: red; color: white; padding: 6px;" class="delete_image" data-id="{{ $image->id }}">
+                                                    X
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="mt-3">
+                                        <input multiple name="works_banner_image[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="footer_logo" class="inline-block mb-2 text-base font-medium">Blog banner şəkli</label>
+
+                                    <div class="wrapper_image relative w-64 h-24">
+                                        @foreach($model->images->where('type', 'blog_banner_image') as $image)
+                                            <div class="relative w-64 h-24">
+                                                <a target="_blank" style="display: block; width: 100%; height: 100%;" href="{{ asset($image->url) }}">
+                                                    <img style="width: 100%; height: 100%;" src="{{ asset($image->url) }}" alt="">
+                                                </a>
+                                                <a href="{{ route('siteinfo.deleteFile', $image->id) }}" style="cursor: pointer; position: absolute; top: 0; right: 0; background-color: red; color: white; padding: 6px;" class="delete_image" data-id="{{ $image->id }}">
+                                                    X
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="mt-3">
+                                        <input multiple name="blog_banner_image[]" type="file" class="cursor-pointer form-file border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500">
+                                    </div>
+                                </div>
                             </div>
 
 

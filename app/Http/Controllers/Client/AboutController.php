@@ -15,8 +15,7 @@ class AboutController extends Controller
     }
     public function index()
     {
-        $about = $this->repository->find(1);
-        dd($about);
-        return view('front.about.index');
+        $about = $this->repository->findWith(1, ['about_page_about_image']);
+        return view('front.about.index', compact('about'));
     }
 }

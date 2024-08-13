@@ -38,12 +38,12 @@
                                     <div class="flex flex-wrap gap-5">
                                         <div class="mb-3 flex-1">
                                             <label for="textArea" class="inline-block mb-2 text-base font-medium">Ana səhifə haqqımızda mətni ({{ $language->code }})</label>
-                                            <textarea name="home_page_about_text[{{ $language->code }}]" class="ckeditortext form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="textArea" rows="3">{{ old('home_page_about_text.' . $language->code, $model->getTranslation('home_page_about_text', $language->code)) }}</textarea>
+                                            <textarea name="home_page_about_text[{{ $language->code }}]" class="summ"  rows="3">{{ old('home_page_about_text.' . $language->code, $model->getTranslation('home_page_about_text', $language->code)) }}</textarea>
                                         </div>
 
                                         <div class="mb-3 flex-1">
                                             <label for="textArea" class="inline-block mb-2 text-base font-medium">Haqqımızda səhifəsi haqqımızda mətni ({{ $language->code }})</label>
-                                            <textarea name="about_page_about_text[{{ $language->code }}]" class="ckeditortext form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" id="textArea" rows="3">{{ old('about_page_about_text.' . $language->code, $model->getTranslation('about_page_about_text', $language->code)) }}</textarea>
+                                            <textarea name="about_page_about_text[{{ $language->code }}]" class="summ"  rows="3">{{ old('about_page_about_text.' . $language->code, $model->getTranslation('about_page_about_text', $language->code)) }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -111,33 +111,28 @@
     </div>
 </div>
 @endsection
+@push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
+@endpush
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    const inputFiles = document.querySelectorAll('input[type=file]');
-    const wrappers = document.querySelectorAll('.wrapper_image img'); // Düzgün selector daxil edin
+<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-    inputFiles.forEach((inputFile, i) => {
-        inputFile.addEventListener('change', (event) => {
-            var file = event.target.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    wrappers[i].src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
+<script>
+
+
+
+    document.querySelectorAll('.summ').forEach((textarea) => {
+        $(textarea).summernote({
+            height: 200,
+            minHeight: null,
+            maxHeight: null,
+            focus: true
         });
     });
 
-    function openPdf(url) {
-        window.open(url, '_blank');
-    }
-
-    document.querySelectorAll('.ckeditortext').forEach((textarea) => {
-        CKEDITOR.replace(textarea);
-    });
 
     document.querySelectorAll('.delete_image').forEach((button) => {
         button.addEventListener('click', function(e) {
