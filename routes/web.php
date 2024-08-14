@@ -24,13 +24,14 @@ Route::prefix('')->name('client.')->group(function () use ($repository) {
         } elseif ($link->code == 'works') {
             Route::get($link->slug, [WorkController::class, 'index'])->name($link->code);
         } elseif ($link->code == 'work') {
-            Route::get($link->slug. "{slug}", [WorkController::class, $link->code])->name($link->code);
+            Route::get($link->slug. "/{slug}", [WorkController::class, $link->code])->name($link->code);
         } elseif ($link->code == 'blogs') {
             Route::get($link->slug, [BlogController::class, 'index'])->name($link->code);
         } elseif ($link->code == 'blog') {
-            Route::get($link->slug . "{slug}", [BlogController::class, $link->code])->name($link->code);
+            Route::get($link->slug . "/{slug}", [BlogController::class, $link->code])->name($link->code);
         } else {
             Route::get($link->slug, [AboutController::class, 'index'])->name($link->code);
         }
     }
 });
+Route::post('/contact/post', [\App\Http\Controllers\ContactFormController::class, 'post'])->name('contact.post');

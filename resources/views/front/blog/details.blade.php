@@ -16,16 +16,13 @@
             'November' => 'Noyabr',
             'December' => 'Dekabr',
         ];
-
-        // Get the month name in Azerbaijani
-
     @endphp
     @push('links')
         <title>{{$blog->seo_title}}</title>
         <meta property="og:title" content="{{$blog->seo_title}}">
         <meta name="description" content="{{$blog->seo_description}}">
         <meta property="og:description" content="{{$blog->seo_description}}">
-        <meta property="og:image" content="{{$blog->image->url ?? ''}}">
+        <meta property="og:image" content="{{$blog->image ? env('APP_URL') . '/' .$blog->image->url : ''}}">
         {!! $blog->seo_links !!}
     @endpush
 <section style="background-image: url('{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'blog_banner_image')->first())->url ?? '' }}')" class="pages-header text-center">
@@ -71,13 +68,13 @@
                                     </strong>
                                 </li>
                                 <li>
-                                    <a href="http://www.facebook.com/sharer/sharer.php?u=https://adver.az/az/bloq-genislenen-bazar-bu-gun-ve-ya-icmeli-su-medeniyyeti-100102"><i class="fa fa-facebook main-color effect"></i></a>
+                                    <a href="http://www.facebook.com/sharer/sharer.php?u={{ route('client.blog', $blog->slug) }}"><i class="fa fa-facebook main-color effect"></i></a>
                                 </li>
                                 <li>
-                                    <a href="http://www.twitter.com/intent/tweet?url=https://adver.az/az/bloq-genislenen-bazar-bu-gun-ve-ya-icmeli-su-medeniyyeti-100102"><i class="fa fa-twitter main-color effect"></i></a>
+                                    <a href="http://www.twitter.com/intent/tweet?url={{ route('client.blog', $blog->slug) }}"><i class="fa fa-twitter main-color effect"></i></a>
                                 </li>
                                 <li>
-                                    <a href="http://plus.google.com/share?url=https://adver.az/az/bloq-genislenen-bazar-bu-gun-ve-ya-icmeli-su-medeniyyeti-100102"><i class="fa fa-google main-color effect"></i></a>
+                                    <a href="http://plus.google.com/share?url={{ route('client.blog', $blog->slug) }}"><i class="fa fa-google main-color effect"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -87,9 +84,9 @@
             <div class="col-xs-12 col-sm-4">
                 <div class="side-bar">
                     <div class="widget widget-search mb-30">
-                        <form class="search-form" action="/az/bloq">
+                        <form class="search-form" action="{{route('client.blogs')}}">
                             <div class="input-group">
-                                <input class="input-field" name="s" required="required" placeholder="Axtar..." type="text">
+                                <input class="input-field" name="q" required="required" placeholder="{{ TranslateService::getTranslation('blogs_page', 'search_input_placeholder', app()->getLocale()) }} ..." type="text">
                                 <button class="input-group-addon main-color-bg"> <i class="fa fa-search"></i> </button>
                             </div>
                         </form>
@@ -126,5 +123,4 @@
     @push('scripts')
         {!! $blog->seo_scripts !!}
     @endpush
-
 @endsection

@@ -1,5 +1,12 @@
 @extends('front.layouts.app')
 @section('content')
+    @push('links')
+        <title>{{$seo->seo_title}}</title>
+        <meta property="og:title" content="{{$seo->seo_title}}">
+        <meta name="description" content="{{$seo->seo_description}}">
+        <meta property="og:description" content="{{$seo->seo_description}}">
+        {!! $seo->seo_links !!}
+    @endpush
 <script src="recaptcha/api.js" async="" defer=""></script>
 <section id="home" style="background-image: url('{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'banner_image')->first())->url ?? '' }}')" class="page-table home-1">
     <div class="table-cell">
@@ -24,6 +31,8 @@
         </div>
     </div>
 </section>
+
+
 
 
 
@@ -104,29 +113,28 @@
         </div>
         <div class="row">
             @foreach($blogs as $blog)
-            <div class="col-xs-12 col-md-4">
-                <div class="single-blog mb-30">
-                    <img src="{{$blog->image->url}}" alt="">
-                    <div class="blog-meta">
-                        <a href="/az/bloq-genislenen-bazar-bu-gun-ve-ya-icmeli-su-medeniyyeti-100102">
-                            <h3 class="title effect">{{$blog->title}}</h3>
-                        </a>
-                        <p class="blog-details">
-                        </p>
-                        <div class="share-btn main-color effect text-center">
-                            <i class="fa fa-share-alt"></i>
-                            <a href="http://www.twitter.com/intent/tweet?url=https://adver.az/az/bloq-genislenen-bazar-bu-gun-ve-ya-icmeli-su-medeniyyeti-100102" class="social-btn effect"><i class="fa fa-twitter"></i></a>
-                            <a href="http://plus.google.com/share?url=https://adver.az/az/bloq-genislenen-bazar-bu-gun-ve-ya-icmeli-su-medeniyyeti-100102" class="social-btn effect"><i class="fa fa-google-plus"></i></a>
-                            <a href="http://www.facebook.com/sharer/sharer.php?u=https://adver.az/az/bloq-genislenen-bazar-bu-gun-ve-ya-icmeli-su-medeniyyeti-100102" class="social-btn effect"><i class="fa fa-facebook"></i></a>
+                <div class="col-xs-12 col-md-4">
+                    <div class="single-blog mb-30">
+                        <img src="{{$blog->image->url ?? ''}}" alt="">
+                        <div class="blog-meta">
+                            <a href="{{ route('client.blog', $blog->slug) }}">
+                                <h3 class="title effect">{{ $blog->title }}</h3>
+                            </a>
+                            <p class="blog-details"></p>
+                            <div class="share-btn main-color effect text-center">
+                                <i class="fa fa-share-alt"></i>
+                                <a target="_blank" href="http://www.twitter.com/intent/tweet?url={{ route('client.blog', $blog->slug) }}" class="social-btn effect"><i class="fa fa-twitter"></i></a>
+                                <a target="_blank" href="http://plus.google.com/share?url={{ route('client.blog', $blog->slug) }}" class="social-btn effect"><i class="fa fa-google-plus"></i></a>
+                                <a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u={{ route('client.blog', $blog->slug) }}" class="social-btn effect"><i class="fa fa-facebook"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
 
         </div>
-        <a href="{{route('client.works')}}" class="br-button section-btn main-color-bg effect"><span class="main-color effect">{{ TranslateService::getTranslation('home_page', 'blogs_section_more', app()->getLocale()) }} </span></a>
+        <a href="{{route('client.blogs')}}" class="br-button section-btn main-color-bg effect"><span class="main-color effect">{{ TranslateService::getTranslation('home_page', 'blogs_section_more', app()->getLocale()) }} </span></a>
     </div>
     <a href="#contact" class="right-link ver-center main-color scroll-btn"><span class="main-color">{{ TranslateService::getTranslation('home_page', 'blogs_section_contact_button', app()->getLocale()) }}</span><i class="fa fa-long-arrow-right main-color"></i></a>
 </section>
@@ -145,7 +153,8 @@
         </div>
         <div id="contact" class="row">
             <div class="col-xs-12 col-md-8 col-md-offset-2">
-                <form id="contact-form-new" action="/" method="post">
+                <form id="contact-form-new" action="{{route('contact.post')}}" method="post">
+                    @csrf
                     <div class="col-sm-6 col-xs-12">
                         <input class="input-field" placeholder="{{ TranslateService::getTranslation('home_page', 'contact_form_name', app()->getLocale()) }}" name="Contact[name]" id="Contact_name" type="text"> <span class="error text-center mb-30"></span>
                     </div>
@@ -153,7 +162,7 @@
                         <input class="input-field" placeholder="{{ TranslateService::getTranslation('home_page', 'contact_form_email', app()->getLocale()) }}" name="Contact[email]" id="Contact_email" type="email"> <span class="error text-center mb-30"></span>
                     </div>
                     <div class="col-sm-12 col-xs-12">
-                        <textarea class="input-field" placeholder="{{ TranslateService::getTranslation('home_page', 'contact_form_body', app()->getLocale()) }}" name="Contact[body]" id="Contact_body"></textarea> <span class="error text-center mb-30"></span>
+                        <textarea class="input-field" placeholder="{{ TranslateService::getTranslation('home_page', 'contact_form_body', app()->getLocale()) }}" name="Contact[message]" id="Contact_body"></textarea> <span class="error text-center mb-30"></span>
                     </div>
                     <div class="col-sm-12 col-xs-12">
                         <div class="g-recaptcha" data-sitekey="6LcZRLkUAAAAAC5KCdVciKUe4nAydJ1xJudnTszP"></div>
@@ -172,4 +181,8 @@
     </div>
     <a href="#home" class="left-link ver-center main-color scroll-btn"><span class="main-color">Ana Səhifə</span><i class="fa fa-long-arrow-right main-color"></i></a>
 </section>
+
+    @push('scripts')
+        {!! $seo->seo_scripts !!}
+    @endpush
 @endsection

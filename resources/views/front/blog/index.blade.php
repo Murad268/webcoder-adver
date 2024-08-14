@@ -1,5 +1,12 @@
 @extends('front.layouts.app')
 @section('content')
+    @push('links')
+        <title>{{$seo->seo_title}}</title>
+        <meta property="og:title" content="{{$seo->seo_title}}">
+        <meta name="description" content="{{$seo->seo_description}}">
+        <meta property="og:description" content="{{$seo->seo_description}}">
+        {!! $seo->seo_links !!}
+    @endpush
     @php
         // Define Azerbaijani month names
         $months = [
@@ -77,21 +84,10 @@
                         </div>
                         @if($blogs->count() > 0)
                             <div class="blog-pagination text-center mb-30">
-                                <ul id="yw0" class="yiiPager">
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq.html"><i class="fa fa-angle-left"></i></a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect active" href="bloq.html">1</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/2.html">2</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/3.html">3</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/4.html">4</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/5.html">5</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/6.html">6</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/7.html">7</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/8.html">8</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/9.html">9</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/10.html">10</a></li>
-                                    <li class="main-color-bg pagination-btn"><a class="effect" href="bloq/2.html"><i class="fa fa-angle-right"></i></a></li>
-                                </ul>
+                                {{ $blogs->appends(['q' => $q])->links('pagination::bootstrap-4') }}
                             </div>
+
+
                             <div class="keys" style="display:none" title="/az/bloq"><span>100102</span><span>100101</span><span>100100</span></div>
                         @endif
 
@@ -103,7 +99,7 @@
                     <div class="widget widget-search mb-30">
                         <form class="search-form" >
                             <div class="input-group">
-                                <input class="input-field" name="q" required="required" placeholder="{{ TranslateService::getTranslation('blogs_page', 'search_input_placeholder', app()->getLocale()) }} ..." type="text">
+                                <input class="input-field" name="q" value="{{$q}}" required="required" placeholder="{{ TranslateService::getTranslation('blogs_page', 'search_input_placeholder', app()->getLocale()) }} ..." type="text">
                                 <button class="input-group-addon main-color-bg"> <i class="fa fa-search"></i> </button>
                             </div>
                         </form>
@@ -137,4 +133,8 @@
         </div>
     </div>
 </section>
+
+    @push('scripts')
+        {!! $seo->seo_scripts !!}
+    @endpush
 @endsection

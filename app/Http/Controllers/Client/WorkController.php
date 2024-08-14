@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\MenuLinks\Models\Menu;
 use Modules\Work\Repositories\ModelRepository;
 
 class WorkController extends Controller
@@ -15,7 +16,8 @@ class WorkController extends Controller
     public function index()
     {
         $works = $this->repository->active_all(null, ['image']);
-        return view('front.work.index', compact('works'));
+        $seo = Menu::where('code', 'works')->first();
+        return view('front.work.index', compact('works', 'seo'));
     }
 
 

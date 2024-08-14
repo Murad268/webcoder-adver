@@ -13,9 +13,12 @@
         <nav class="nav-list table-cell text-center">
             <ul class="">
                 @foreach($links as $link)
-                    @if($link->code != "work" and $link->code != "blog")
+                    @if($link->code != "work" and $link->code != "blog" and $link->code != "home")
                         <li><a href="{{$link->slug}}">{{$link->title}}</a></li>
                         @endif
+                    @if($link->code == 'home')
+                            <li><a href="/">{{$link->title}}</a></li>
+                    @endif
                 @endforeach
             </ul>
         </nav>

@@ -1,5 +1,12 @@
 @extends('front.layouts.app')
 @section('content')
+    @push('links')
+        <title>{{$seo->seo_title}}</title>
+        <meta property="og:title" content="{{$seo->seo_title}}">
+        <meta name="description" content="{{$seo->seo_description}}">
+        <meta property="og:description" content="{{$seo->seo_description}}">
+        {!! $seo->seo_links !!}
+    @endpush
 <section style="background-image: url('{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'works_banner_image')->first())->url ?? '' }}')" class="pages-header text-center">
     <div class="page-table">
         <div class="table-cell">
@@ -43,4 +50,7 @@
         </div>
     </div>
 </section>
+    @push('scripts')
+        {!! $seo->seo_scripts !!}
+    @endpush
 @endsection

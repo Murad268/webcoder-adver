@@ -5,7 +5,7 @@
         <meta property="og:title" content="{{$work->seo_title}}">
         <meta name="description" content="{{$work->seo_description}}">
         <meta property="og:description" content="{{$work->seo_description}}">
-        <meta property="og:image" content="{{$work->image->url ? ""}}">
+        <meta property="og:image" content="{{$work->image ? env('APP_URL') . '/' .$work->image->url : ''}}">
         {!! $work->seo_links !!}
     @endpush
 <section style="background-image: url('{{ env('APP_URL') . '/' . optional(optional(ServiceFacade::getData())->with('images')->first()?->images->where('type', 'works_banner_image')->first())->url ?? '' }}')" class="pages-header text-center">
